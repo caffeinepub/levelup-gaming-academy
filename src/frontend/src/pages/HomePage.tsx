@@ -5,27 +5,27 @@ const games = [
   {
     id: "chess",
     name: "Chess",
-    img: "/assets/generated/chess-logo-transparent.dim_200x200.png",
+    img: "/assets/uploads/chess-3.jpeg",
   },
   {
     id: "fortnite",
     name: "Fortnite",
-    img: "/assets/generated/fortnite-logo-transparent.dim_200x200.png",
+    img: "/assets/uploads/fortnight-5.jpeg",
   },
   {
     id: "codm",
     name: "Call of Duty Mobile",
-    img: "/assets/generated/codm-logo-transparent.dim_200x200.png",
+    img: "/assets/uploads/codm-1.jpeg",
   },
   {
     id: "valorant",
     name: "Valorant",
-    img: "/assets/generated/valorant-logo-transparent.dim_200x200.png",
+    img: "/assets/uploads/valorant-2.jpeg",
   },
   {
     id: "roblox",
     name: "Roblox",
-    img: "/assets/generated/roblox-logo-transparent.dim_200x200.png",
+    img: "/assets/uploads/roblox-4.jpeg",
   },
 ];
 
@@ -284,19 +284,13 @@ function GameCard({
         height: "160px",
         overflow: "hidden",
         borderRadius: "16px",
-        background: hovered ? "rgba(34,197,94,0.1)" : "rgba(255,255,255,0.06)",
-        backdropFilter: "blur(12px)",
-        WebkitBackdropFilter: "blur(12px)",
+        background: "rgba(0,0,0,0.6)",
         border: hovered
           ? "1px solid rgba(34,197,94,0.55)"
           : "1px solid rgba(255,255,255,0.12)",
         boxShadow: hovered
           ? "0 0 22px rgba(34,197,94,0.4), 0 8px 24px rgba(0,0,0,0.5)"
           : "0 4px 16px rgba(0,0,0,0.4)",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "flex-end",
         cursor: "pointer",
         transition: "all 0.25s ease",
         transform: hovered
@@ -307,35 +301,26 @@ function GameCard({
         animation: `slideUp 0.5s ease ${index * 0.1}s both`,
       }}
     >
-      {/* Image fills top portion */}
-      <div
+      {/* Full-card image */}
+      <img
+        src={game.img}
+        alt={game.name}
         style={{
           position: "absolute",
           inset: 0,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          paddingBottom: "32px",
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          display: "block",
         }}
-      >
-        <img
-          src={game.img}
-          alt={game.name}
-          style={{
-            width: "80px",
-            height: "80px",
-            objectFit: "contain",
-            display: "block",
-          }}
-        />
-      </div>
+      />
 
-      {/* Dark overlay */}
+      {/* Dark overlay for readability */}
       <div
         style={{
           position: "absolute",
           inset: 0,
-          background: "rgba(0,0,0,0.2)",
+          background: "rgba(0,0,0,0.35)",
           pointerEvents: "none",
         }}
       />
@@ -343,10 +328,12 @@ function GameCard({
       {/* Game name at bottom */}
       <div
         style={{
-          position: "relative",
+          position: "absolute",
+          bottom: 0,
+          left: 0,
+          right: 0,
           zIndex: 1,
-          width: "100%",
-          background: "rgba(0,0,0,0.55)",
+          background: "rgba(0,0,0,0.65)",
           padding: "6px 8px",
           textAlign: "center",
         }}
