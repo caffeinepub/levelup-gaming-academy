@@ -1,223 +1,138 @@
 import { useNavigate } from "@tanstack/react-router";
-import type React from "react";
-import { useState } from "react";
-
-function ChessIcon() {
-  return (
-    <svg
-      role="img"
-      aria-label="Chess"
-      viewBox="0 0 64 64"
-      width="56"
-      height="56"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <rect x="20" y="52" width="24" height="5" rx="2" fill="#ffffff" />
-      <rect x="24" y="44" width="16" height="8" rx="1" fill="#ffffff" />
-      <path d="M26 44 Q26 30 32 24 Q38 30 38 44Z" fill="#ffffff" />
-      <circle cx="32" cy="14" r="5" fill="#ffffff" />
-      <rect x="29" y="19" width="6" height="6" fill="#ffffff" />
-    </svg>
-  );
-}
-
-function FortniteIcon() {
-  return (
-    <svg
-      role="img"
-      aria-label="Fortnite"
-      viewBox="0 0 64 64"
-      width="56"
-      height="56"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <polygon
-        points="32,6 42,22 58,22 46,34 50,52 32,42 14,52 18,34 6,22 22,22"
-        fill="#c084fc"
-        stroke="#a855f7"
-        strokeWidth="1.5"
-      />
-      <polygon
-        points="32,16 38,26 48,26 40,33 43,44 32,38 21,44 24,33 16,26 26,26"
-        fill="#7c3aed"
-      />
-    </svg>
-  );
-}
-
-function CodmIcon() {
-  return (
-    <svg
-      role="img"
-      aria-label="Call of Duty Mobile"
-      viewBox="0 0 64 64"
-      width="56"
-      height="56"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <circle
-        cx="32"
-        cy="32"
-        r="22"
-        stroke="#f97316"
-        strokeWidth="2.5"
-        fill="none"
-      />
-      <line
-        x1="32"
-        y1="10"
-        x2="32"
-        y2="20"
-        stroke="#f97316"
-        strokeWidth="2.5"
-        strokeLinecap="round"
-      />
-      <line
-        x1="32"
-        y1="44"
-        x2="32"
-        y2="54"
-        stroke="#f97316"
-        strokeWidth="2.5"
-        strokeLinecap="round"
-      />
-      <line
-        x1="10"
-        y1="32"
-        x2="20"
-        y2="32"
-        stroke="#f97316"
-        strokeWidth="2.5"
-        strokeLinecap="round"
-      />
-      <line
-        x1="44"
-        y1="32"
-        x2="54"
-        y2="32"
-        stroke="#f97316"
-        strokeWidth="2.5"
-        strokeLinecap="round"
-      />
-      <circle cx="32" cy="32" r="4" fill="#f97316" />
-    </svg>
-  );
-}
-
-function ValorantIcon() {
-  return (
-    <svg
-      role="img"
-      aria-label="Valorant"
-      viewBox="0 0 64 64"
-      width="56"
-      height="56"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path d="M10 14 L32 52 L44 28 L24 28 L20 14 Z" fill="#ff4655" />
-      <path d="M32 52 L54 14 L40 14 L32 35 Z" fill="#ffffff" />
-    </svg>
-  );
-}
-
-function RobloxIcon() {
-  return (
-    <svg
-      role="img"
-      aria-label="Roblox"
-      viewBox="0 0 64 64"
-      width="56"
-      height="56"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <rect x="12" y="12" width="40" height="40" rx="6" fill="#e2231a" />
-      <rect x="22" y="22" width="12" height="12" rx="2" fill="#ffffff" />
-      <rect x="30" y="30" width="12" height="12" rx="2" fill="#ffffff" />
-    </svg>
-  );
-}
+import { useMemo, useState } from "react";
 
 const games = [
-  { id: "chess", name: "Chess", Icon: ChessIcon },
-  { id: "fortnite", name: "Fortnite", Icon: FortniteIcon },
-  { id: "codm", name: "Call of Duty Mobile", Icon: CodmIcon },
-  { id: "valorant", name: "Valorant", Icon: ValorantIcon },
-  { id: "roblox", name: "Roblox", Icon: RobloxIcon },
+  {
+    id: "chess",
+    name: "Chess",
+    img: "/assets/generated/chess-logo-transparent.dim_200x200.png",
+  },
+  {
+    id: "fortnite",
+    name: "Fortnite",
+    img: "/assets/generated/fortnite-logo-transparent.dim_200x200.png",
+  },
+  {
+    id: "codm",
+    name: "Call of Duty Mobile",
+    img: "/assets/generated/codm-logo-transparent.dim_200x200.png",
+  },
+  {
+    id: "valorant",
+    name: "Valorant",
+    img: "/assets/generated/valorant-logo-transparent.dim_200x200.png",
+  },
+  {
+    id: "roblox",
+    name: "Roblox",
+    img: "/assets/generated/roblox-logo-transparent.dim_200x200.png",
+  },
 ];
+
+function useParticles(count: number) {
+  return useMemo(() => {
+    return Array.from({ length: count }, (_, i) => ({
+      id: i,
+      top: `${Math.floor((i * 137.5) % 100)}%`,
+      left: `${Math.floor((i * 97.3 + 13) % 100)}%`,
+      size: 3 + (i % 4),
+      duration: `${8 + (i % 12)}s`,
+      delay: `${-(i * 1.3) % 15}s`,
+      opacity: 0.3 + (i % 4) * 0.1,
+    }));
+  }, [count]);
+}
 
 export default function HomePage() {
   const navigate = useNavigate();
+  const particles = useParticles(15);
 
   return (
     <div
       style={{
         minHeight: "100vh",
         background:
-          "linear-gradient(135deg, #0a0a0f 0%, #0d1117 50%, #0a0f1a 100%)",
+          "linear-gradient(160deg, #050a14 0%, #010308 60%, #000000 100%)",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        padding: "2rem 1rem",
+        padding: "3rem 1rem",
         position: "relative",
         overflow: "hidden",
+        fontFamily: "'Mona Sans', sans-serif",
       }}
     >
-      {/* Grid overlay */}
+      {/* Glowing grid overlay */}
       <div
         style={{
           position: "absolute",
           inset: 0,
           backgroundImage:
-            "linear-gradient(rgba(34,197,94,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(34,197,94,0.04) 1px, transparent 1px)",
-          backgroundSize: "40px 40px",
+            "linear-gradient(rgba(34,197,94,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(34,197,94,0.06) 1px, transparent 1px)",
+          backgroundSize: "50px 50px",
           pointerEvents: "none",
+          zIndex: 0,
         }}
       />
+
+      {/* Floating particles */}
+      {particles.map((p) => (
+        <div
+          key={p.id}
+          style={{
+            position: "absolute",
+            top: p.top,
+            left: p.left,
+            width: `${p.size}px`,
+            height: `${p.size}px`,
+            borderRadius: "50%",
+            background: `rgba(34,197,94,${p.opacity})`,
+            boxShadow: `0 0 ${p.size * 3}px rgba(34,197,94,0.6)`,
+            animation: `floatParticle ${p.duration} ${p.delay} ease-in-out infinite`,
+            pointerEvents: "none",
+            zIndex: 0,
+          }}
+        />
+      ))}
 
       {/* Description above title */}
       <p
         style={{
-          fontSize: "0.9rem",
+          fontSize: "0.95rem",
           color: "#9ca3af",
-          marginBottom: "0.5rem",
+          marginBottom: "0.75rem",
           textAlign: "center",
           position: "relative",
           zIndex: 1,
-          maxWidth: "480px",
+          maxWidth: "560px",
+          lineHeight: 1.6,
+          animation: "fadeIn 1s ease forwards",
+          letterSpacing: "0.01em",
         }}
       >
-        LevelUp Gaming Academy is here to help you improve your gaming skills.
+        LevelUp Gaming Academy is here to help you improve your gaming skills
+        and become a better competitive player.
       </p>
 
       {/* Main title */}
       <h1
         style={{
-          fontSize: "clamp(1.5rem, 4vw, 2.5rem)",
-          fontWeight: "700",
-          color: "#f0f0f0",
+          fontSize: "clamp(2rem, 5vw, 3.5rem)",
+          fontWeight: 900,
+          color: "#22c55e",
           marginBottom: "2.5rem",
           textAlign: "center",
-          letterSpacing: "-0.02em",
+          letterSpacing: "-0.03em",
           position: "relative",
           zIndex: 1,
+          lineHeight: 1.1,
+          animation:
+            "fadeIn 1s ease forwards, glowPulse 3s ease-in-out infinite",
+          fontFamily: "'Cabinet Grotesk', 'Mona Sans', sans-serif",
         }}
       >
-        <span
-          style={{
-            color: "#22c55e",
-            textShadow:
-              "0 0 20px rgba(34,197,94,0.7), 0 0 40px rgba(34,197,94,0.3)",
-          }}
-        >
-          LevelUp
-        </span>{" "}
-        Gaming Academy
+        LevelUp Gaming Academy
       </h1>
 
       {/* Frosted glass oval */}
@@ -227,27 +142,29 @@ export default function HomePage() {
           zIndex: 1,
           borderRadius: "50%",
           padding: "3rem 4rem",
-          background: "rgba(255, 255, 255, 0.05)",
-          backdropFilter: "blur(20px)",
-          WebkitBackdropFilter: "blur(20px)",
+          background: "rgba(255, 255, 255, 0.04)",
+          backdropFilter: "blur(24px)",
+          WebkitBackdropFilter: "blur(24px)",
           boxShadow:
-            "0 0 40px rgba(34,197,94,0.15), 0 8px 40px rgba(0,0,0,0.4), inset 0 0 0 1px rgba(255,255,255,0.12)",
-          border: "1px solid rgba(255,255,255,0.12)",
+            "0 0 60px rgba(34,197,94,0.12), 0 8px 40px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(255,255,255,0.1)",
+          border: "1px solid rgba(255,255,255,0.1)",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
           gap: "1.5rem",
+          animation: "fadeIn 1.2s ease forwards",
         }}
       >
         {/* Subtitle above game icons */}
         <p
           style={{
-            fontSize: "0.85rem",
+            fontSize: "0.88rem",
             color: "#9ca3af",
             textAlign: "center",
             margin: 0,
-            letterSpacing: "0.01em",
+            letterSpacing: "0.02em",
+            animation: "fadeIn 1.5s ease forwards",
           }}
         >
           For further assistance please select your game.
@@ -262,10 +179,11 @@ export default function HomePage() {
             alignItems: "center",
           }}
         >
-          {games.map((game) => (
+          {games.map((game, index) => (
             <GameCard
               key={game.id}
               game={game}
+              index={index}
               onClick={() =>
                 navigate({ to: "/game/$gameId", params: { gameId: game.id } })
               }
@@ -274,26 +192,70 @@ export default function HomePage() {
         </div>
       </div>
 
+      {/* Tournament Section */}
+      <div
+        style={{
+          position: "relative",
+          zIndex: 1,
+          marginTop: "2.5rem",
+          maxWidth: "560px",
+          width: "100%",
+          background: "rgba(34,197,94,0.06)",
+          border: "1px solid rgba(34,197,94,0.35)",
+          boxShadow:
+            "0 0 30px rgba(34,197,94,0.15), 0 8px 30px rgba(0,0,0,0.4)",
+          borderRadius: "16px",
+          padding: "2rem",
+          textAlign: "center",
+          animation: "slideUp 0.8s ease 0.6s both",
+        }}
+      >
+        <div
+          style={{
+            fontSize: "2rem",
+            marginBottom: "0.75rem",
+          }}
+        >
+          🏆
+        </div>
+        <h2
+          style={{
+            fontSize: "1.4rem",
+            fontWeight: 700,
+            color: "#ffffff",
+            margin: "0 0 0.75rem 0",
+            letterSpacing: "-0.01em",
+            fontFamily: "'Cabinet Grotesk', 'Mona Sans', sans-serif",
+          }}
+        >
+          Monthly Tournament
+        </h2>
+        <p
+          style={{
+            fontSize: "0.92rem",
+            color: "#9ca3af",
+            margin: 0,
+            lineHeight: 1.65,
+          }}
+        >
+          We organize a tournament every month where all players can participate
+          and win exciting cash prizes.
+        </p>
+      </div>
+
       {/* Footer */}
       <footer
         style={{
           marginTop: "3rem",
           textAlign: "center",
-          color: "#6b7280",
+          color: "#4b5563",
           fontSize: "0.8rem",
           position: "relative",
           zIndex: 1,
+          letterSpacing: "0.01em",
         }}
       >
-        © {new Date().getFullYear()}. Built with love using{" "}
-        <a
-          href={`https://caffeine.ai?utm_source=caffeine-footer&utm_medium=referral&utm_content=${encodeURIComponent(window.location.hostname)}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{ color: "#6b7280", textDecoration: "underline" }}
-        >
-          caffeine.ai
-        </a>
+        © 2026 LevelUp Gaming Academy — Helping gamers level up their skills.
       </footer>
     </div>
   );
@@ -301,9 +263,11 @@ export default function HomePage() {
 
 function GameCard({
   game,
+  index,
   onClick,
 }: {
-  game: { id: string; name: string; Icon: () => React.ReactElement };
+  game: { id: string; name: string; img: string };
+  index: number;
   onClick: () => void;
 }) {
   const [hovered, setHovered] = useState(false);
@@ -316,51 +280,90 @@ function GameCard({
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
-        width: "130px",
-        height: "130px",
-        background: hovered ? "rgba(34,197,94,0.08)" : "rgba(255,255,255,0.07)",
+        width: "140px",
+        height: "160px",
+        overflow: "hidden",
+        borderRadius: "16px",
+        background: hovered ? "rgba(34,197,94,0.1)" : "rgba(255,255,255,0.06)",
         backdropFilter: "blur(12px)",
         WebkitBackdropFilter: "blur(12px)",
         border: hovered
-          ? "1px solid rgba(34,197,94,0.45)"
-          : "1px solid rgba(255,255,255,0.15)",
-        borderRadius: "16px",
+          ? "1px solid rgba(34,197,94,0.55)"
+          : "1px solid rgba(255,255,255,0.12)",
         boxShadow: hovered
-          ? "0 0 16px rgba(34,197,94,0.3), 0 6px 20px rgba(0,0,0,0.4)"
-          : "0 2px 8px rgba(0,0,0,0.3)",
+          ? "0 0 22px rgba(34,197,94,0.4), 0 8px 24px rgba(0,0,0,0.5)"
+          : "0 4px 16px rgba(0,0,0,0.4)",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        justifyContent: "center",
-        gap: "0.5rem",
+        justifyContent: "flex-end",
         cursor: "pointer",
-        transition: "all 0.2s ease",
-        transform: hovered ? "scale(1.05) translateY(-2px)" : "scale(1)",
-        padding: "0.75rem",
+        transition: "all 0.25s ease",
+        transform: hovered
+          ? "scale(1.05) translateY(-3px)"
+          : "scale(1) translateY(0)",
+        padding: 0,
+        position: "relative",
+        animation: `slideUp 0.5s ease ${index * 0.1}s both`,
       }}
     >
+      {/* Image fills top portion */}
       <div
         style={{
-          width: "64px",
-          height: "64px",
+          position: "absolute",
+          inset: 0,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
+          paddingBottom: "32px",
         }}
       >
-        <game.Icon />
+        <img
+          src={game.img}
+          alt={game.name}
+          style={{
+            width: "80px",
+            height: "80px",
+            objectFit: "contain",
+            display: "block",
+          }}
+        />
       </div>
-      <span
+
+      {/* Dark overlay */}
+      <div
         style={{
-          fontSize: "0.7rem",
-          fontWeight: "600",
-          color: "#ffffff",
+          position: "absolute",
+          inset: 0,
+          background: "rgba(0,0,0,0.2)",
+          pointerEvents: "none",
+        }}
+      />
+
+      {/* Game name at bottom */}
+      <div
+        style={{
+          position: "relative",
+          zIndex: 1,
+          width: "100%",
+          background: "rgba(0,0,0,0.55)",
+          padding: "6px 8px",
           textAlign: "center",
-          lineHeight: 1.2,
         }}
       >
-        {game.name}
-      </span>
+        <span
+          style={{
+            fontSize: "0.68rem",
+            fontWeight: 700,
+            color: "#ffffff",
+            lineHeight: 1.2,
+            display: "block",
+            letterSpacing: "0.02em",
+          }}
+        >
+          {game.name}
+        </span>
+      </div>
     </button>
   );
 }

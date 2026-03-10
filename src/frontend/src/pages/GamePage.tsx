@@ -22,21 +22,21 @@ const defaultPacks = [
     id: "beginner",
     name: "Beginner Pack",
     description:
-      "We will help you improve your skills from the basics and build a strong foundation.",
+      "We help you improve your skills from the basics and understand the core mechanics of the game.",
     popular: false,
   },
   {
     id: "advanced",
     name: "Advanced Pack",
     description:
-      "We will help you improve your movement, aim skills, and high IQ gameplay strategies.",
+      "We help you improve your movement, aim skills, and high IQ level plays.",
     popular: false,
   },
   {
     id: "pro",
     name: "Pro Pack",
     description:
-      "We will help you master aim, movement, and high IQ level plays to compete at a professional level.",
+      "We help you master both aim and movement along with advanced high IQ strategies used by top players.",
     popular: true,
   },
 ];
@@ -87,6 +87,7 @@ export default function GamePage() {
         padding: "2rem 1rem",
         position: "relative",
         overflow: "hidden",
+        fontFamily: "'Mona Sans', sans-serif",
       }}
     >
       {/* Grid overlay */}
@@ -95,8 +96,8 @@ export default function GamePage() {
           position: "absolute",
           inset: 0,
           backgroundImage:
-            "linear-gradient(rgba(34,197,94,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(34,197,94,0.03) 1px, transparent 1px)",
-          backgroundSize: "40px 40px",
+            "linear-gradient(rgba(34,197,94,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(34,197,94,0.04) 1px, transparent 1px)",
+          backgroundSize: "50px 50px",
           pointerEvents: "none",
         }}
       />
@@ -143,20 +144,24 @@ export default function GamePage() {
         {/* Heading */}
         <h1
           style={{
-            fontSize: "clamp(1.5rem, 4vw, 2rem)",
-            fontWeight: "700",
+            fontSize: "clamp(1.5rem, 4vw, 2.2rem)",
+            fontWeight: 800,
             color: "#ffffff",
             textShadow: "0 0 20px rgba(34,197,94,0.4)",
             marginBottom: "0.4rem",
+            fontFamily: "'Cabinet Grotesk', 'Mona Sans', sans-serif",
+            letterSpacing: "-0.02em",
+            animation: "fadeIn 0.7s ease forwards",
           }}
         >
           {gameName}
         </h1>
         <p
           style={{
-            color: "#d1d5db",
-            fontSize: "1rem",
+            color: "#9ca3af",
+            fontSize: "0.95rem",
             marginBottom: "2.5rem",
+            animation: "fadeIn 0.9s ease forwards",
           }}
         >
           Choose your training pack
@@ -171,8 +176,8 @@ export default function GamePage() {
             alignItems: "stretch",
           }}
         >
-          {packs.map((pack) => (
-            <PackCard key={pack.id} pack={pack} />
+          {packs.map((pack, index) => (
+            <PackCard key={pack.id} pack={pack} index={index} />
           ))}
         </div>
 
@@ -180,19 +185,21 @@ export default function GamePage() {
         <div
           style={{
             marginTop: "2.5rem",
-            padding: "1.1rem 1.75rem",
+            padding: "1.25rem 1.75rem",
             background: "rgba(34,197,94,0.07)",
-            border: "1px solid rgba(34,197,94,0.25)",
-            borderRadius: "12px",
+            border: "1px solid rgba(34,197,94,0.3)",
+            borderRadius: "14px",
             textAlign: "center",
             color: "#86efac",
             fontSize: "0.95rem",
             fontWeight: "500",
             lineHeight: 1.6,
+            animation: "slideUp 0.6s ease 0.5s both",
+            boxShadow: "0 0 20px rgba(34,197,94,0.1)",
           }}
         >
-          🏆 We organize a tournament every month where players can participate
-          and win cash prizes.
+          🏆 We organize a tournament every month where all players can
+          participate and win exciting cash prizes.
         </div>
 
         {/* Footer */}
@@ -200,19 +207,12 @@ export default function GamePage() {
           style={{
             marginTop: "4rem",
             textAlign: "center",
-            color: "#6b7280",
+            color: "#4b5563",
             fontSize: "0.8rem",
+            letterSpacing: "0.01em",
           }}
         >
-          © {new Date().getFullYear()}. Built with love using{" "}
-          <a
-            href={`https://caffeine.ai?utm_source=caffeine-footer&utm_medium=referral&utm_content=${encodeURIComponent(window.location.hostname)}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ color: "#6b7280", textDecoration: "underline" }}
-          >
-            caffeine.ai
-          </a>
+          © 2026 LevelUp Gaming Academy — Helping gamers level up their skills.
         </footer>
       </div>
     </div>
@@ -221,6 +221,7 @@ export default function GamePage() {
 
 function PackCard({
   pack,
+  index,
 }: {
   pack: {
     id: string;
@@ -228,6 +229,7 @@ function PackCard({
     description: string;
     popular: boolean;
   };
+  index: number;
 }) {
   const [hovered, setHovered] = useState(false);
 
@@ -238,28 +240,29 @@ function PackCard({
       onMouseLeave={() => setHovered(false)}
       style={{
         flex: "1 1 240px",
-        background: hovered ? "rgba(34,197,94,0.08)" : "rgba(255,255,255,0.07)",
+        background: hovered ? "rgba(34,197,94,0.09)" : "rgba(255,255,255,0.06)",
         backdropFilter: "blur(16px)",
         WebkitBackdropFilter: "blur(16px)",
         border: pack.popular
           ? "2px solid rgba(34,197,94,0.6)"
           : hovered
-            ? "1px solid rgba(34,197,94,0.4)"
-            : "1px solid rgba(255,255,255,0.12)",
+            ? "1px solid rgba(34,197,94,0.5)"
+            : "1px solid rgba(34,197,94,0.2)",
         boxShadow: hovered
-          ? "0 0 18px rgba(34,197,94,0.3), 0 6px 24px rgba(0,0,0,0.5)"
+          ? "0 0 24px rgba(34,197,94,0.35), 0 8px 28px rgba(0,0,0,0.5)"
           : pack.popular
-            ? "0 0 14px rgba(34,197,94,0.15), 0 2px 12px rgba(0,0,0,0.4)"
-            : "0 2px 12px rgba(0,0,0,0.4)",
+            ? "0 0 16px rgba(34,197,94,0.18), 0 4px 16px rgba(0,0,0,0.4)"
+            : "0 4px 16px rgba(0,0,0,0.4)",
         borderRadius: "14px",
         padding: "1.75rem 1.5rem",
         display: "flex",
         flexDirection: "column",
         gap: "0.75rem",
         position: "relative",
-        transition: "all 0.2s ease",
-        transform: hovered ? "translateY(-3px)" : "translateY(0)",
+        transition: "all 0.25s ease",
+        transform: hovered ? "translateY(-4px)" : "translateY(0)",
         cursor: "default",
+        animation: `slideUp 0.5s ease ${index * 0.1 + 0.2}s both`,
       }}
     >
       {pack.popular && (
@@ -271,12 +274,14 @@ function PackCard({
             transform: "translateX(-50%)",
             backgroundColor: "#22c55e",
             color: "#fff",
-            fontSize: "0.7rem",
-            fontWeight: "700",
+            fontSize: "0.68rem",
+            fontWeight: 700,
             padding: "3px 12px",
             borderRadius: "999px",
             whiteSpace: "nowrap",
-            letterSpacing: "0.05em",
+            letterSpacing: "0.06em",
+            textTransform: "uppercase",
+            boxShadow: "0 0 10px rgba(34,197,94,0.5)",
           }}
         >
           Most Popular
@@ -285,18 +290,20 @@ function PackCard({
       <h2
         style={{
           fontSize: "1.1rem",
-          fontWeight: "700",
+          fontWeight: 700,
           color: "#ffffff",
           margin: 0,
+          letterSpacing: "-0.01em",
+          fontFamily: "'Cabinet Grotesk', 'Mona Sans', sans-serif",
         }}
       >
         {pack.name}
       </h2>
       <p
         style={{
-          fontSize: "0.9rem",
+          fontSize: "0.88rem",
           color: "#d1d5db",
-          lineHeight: 1.6,
+          lineHeight: 1.65,
           margin: 0,
           flexGrow: 1,
         }}
@@ -313,24 +320,28 @@ function PackCard({
           textAlign: "center",
           backgroundColor: "#22c55e",
           color: "#ffffff",
-          fontWeight: "600",
-          fontSize: "0.9rem",
-          padding: "0.65rem 1rem",
+          fontWeight: 700,
+          fontSize: "0.88rem",
+          padding: "0.7rem 1rem",
           borderRadius: "8px",
           textDecoration: "none",
-          boxShadow: "0 0 12px rgba(34,197,94,0.4)",
-          transition: "box-shadow 0.2s ease, background-color 0.15s ease",
+          boxShadow: "0 0 14px rgba(34,197,94,0.45)",
+          transition:
+            "box-shadow 0.2s ease, background-color 0.15s ease, transform 0.15s ease",
           marginTop: "0.5rem",
+          letterSpacing: "0.02em",
         }}
         onMouseEnter={(e) => {
           const el = e.currentTarget as HTMLAnchorElement;
           el.style.backgroundColor = "#16a34a";
-          el.style.boxShadow = "0 0 20px rgba(34,197,94,0.65)";
+          el.style.boxShadow = "0 0 24px rgba(34,197,94,0.7)";
+          el.style.transform = "translateY(-1px)";
         }}
         onMouseLeave={(e) => {
           const el = e.currentTarget as HTMLAnchorElement;
           el.style.backgroundColor = "#22c55e";
-          el.style.boxShadow = "0 0 12px rgba(34,197,94,0.4)";
+          el.style.boxShadow = "0 0 14px rgba(34,197,94,0.45)";
+          el.style.transform = "translateY(0)";
         }}
       >
         Start on Telegram
