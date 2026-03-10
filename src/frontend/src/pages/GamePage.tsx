@@ -17,14 +17,13 @@ const gameBackgrounds: Record<string, string> = {
   roblox: "linear-gradient(135deg, #0a0a1a 0%, #1a0a2e 50%, #0a1a2e 100%)",
 };
 
-const packs = [
+const defaultPacks = [
   {
     id: "beginner",
     name: "Beginner Pack",
     description:
       "We will help you improve your skills from the basics and build a strong foundation.",
     popular: false,
-    ocid: "game.beginner.button",
   },
   {
     id: "advanced",
@@ -32,7 +31,6 @@ const packs = [
     description:
       "We will help you improve your movement, aim skills, and high IQ gameplay strategies.",
     popular: false,
-    ocid: "game.advanced.button",
   },
   {
     id: "pro",
@@ -40,7 +38,30 @@ const packs = [
     description:
       "We will help you master aim, movement, and high IQ level plays to compete at a professional level.",
     popular: true,
-    ocid: "game.pro.button",
+  },
+];
+
+const chessPacks = [
+  {
+    id: "beginner",
+    name: "Beginner Pack",
+    description:
+      "In Beginner we help people start learning the basics of chess, including piece movement, simple tactics, and basic strategies.",
+    popular: false,
+  },
+  {
+    id: "advanced",
+    name: "Advanced Pack",
+    description:
+      "In Advanced we help you learn advanced techniques, better strategies, and high IQ plays to improve your game.",
+    popular: false,
+  },
+  {
+    id: "pro",
+    name: "Pro Pack",
+    description:
+      "In Pro we help you master advanced techniques and high IQ level plays to compete at a very high level.",
+    popular: true,
   },
 ];
 
@@ -55,6 +76,8 @@ export default function GamePage() {
   const bg =
     gameBackgrounds[gameId] ??
     "linear-gradient(135deg, #0a0a0f 0%, #0d1117 100%)";
+
+  const packs = gameId === "chess" ? chessPacks : defaultPacks;
 
   return (
     <div
@@ -77,7 +100,6 @@ export default function GamePage() {
           pointerEvents: "none",
         }}
       />
-      {/* Dark overlay for readability */}
       <div
         style={{
           position: "absolute",
@@ -134,7 +156,7 @@ export default function GamePage() {
           style={{
             color: "#d1d5db",
             fontSize: "1rem",
-            marginBottom: "2rem",
+            marginBottom: "2.5rem",
           }}
         >
           Choose your training pack
@@ -145,7 +167,8 @@ export default function GamePage() {
           style={{
             display: "flex",
             flexWrap: "wrap",
-            gap: "1.25rem",
+            gap: "1.5rem",
+            alignItems: "stretch",
           }}
         >
           {packs.map((pack) => (
@@ -156,16 +179,16 @@ export default function GamePage() {
         {/* Tournament note */}
         <div
           style={{
-            marginTop: "2rem",
-            padding: "1rem 1.5rem",
-            background: "rgba(34,197,94,0.08)",
-            border: "1px solid rgba(34,197,94,0.3)",
+            marginTop: "2.5rem",
+            padding: "1.1rem 1.75rem",
+            background: "rgba(34,197,94,0.07)",
+            border: "1px solid rgba(34,197,94,0.25)",
             borderRadius: "12px",
             textAlign: "center",
             color: "#86efac",
             fontSize: "0.95rem",
             fontWeight: "500",
-            boxShadow: "0 0 16px rgba(34,197,94,0.1)",
+            lineHeight: 1.6,
           }}
         >
           🏆 We organize a tournament every month where players can participate
@@ -204,7 +227,6 @@ function PackCard({
     name: string;
     description: string;
     popular: boolean;
-    ocid: string;
   };
 }) {
   const [hovered, setHovered] = useState(false);
@@ -215,28 +237,28 @@ function PackCard({
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
-        flex: "1 1 220px",
-        background: hovered ? "rgba(34,197,94,0.1)" : "rgba(255,255,255,0.07)",
+        flex: "1 1 240px",
+        background: hovered ? "rgba(34,197,94,0.08)" : "rgba(255,255,255,0.07)",
         backdropFilter: "blur(16px)",
         WebkitBackdropFilter: "blur(16px)",
         border: pack.popular
-          ? "2px solid rgba(34,197,94,0.7)"
+          ? "2px solid rgba(34,197,94,0.6)"
           : hovered
-            ? "1px solid rgba(34,197,94,0.6)"
+            ? "1px solid rgba(34,197,94,0.4)"
             : "1px solid rgba(255,255,255,0.12)",
         boxShadow: hovered
-          ? "0 0 28px rgba(34,197,94,0.5), 0 6px 24px rgba(0,0,0,0.5)"
+          ? "0 0 18px rgba(34,197,94,0.3), 0 6px 24px rgba(0,0,0,0.5)"
           : pack.popular
-            ? "0 0 20px rgba(34,197,94,0.2), 0 2px 12px rgba(0,0,0,0.4)"
+            ? "0 0 14px rgba(34,197,94,0.15), 0 2px 12px rgba(0,0,0,0.4)"
             : "0 2px 12px rgba(0,0,0,0.4)",
         borderRadius: "14px",
-        padding: "1.5rem",
+        padding: "1.75rem 1.5rem",
         display: "flex",
         flexDirection: "column",
         gap: "0.75rem",
         position: "relative",
         transition: "all 0.2s ease",
-        transform: hovered ? "translateY(-4px)" : "translateY(0)",
+        transform: hovered ? "translateY(-3px)" : "translateY(0)",
         cursor: "default",
       }}
     >
@@ -274,7 +296,7 @@ function PackCard({
         style={{
           fontSize: "0.9rem",
           color: "#d1d5db",
-          lineHeight: 1.5,
+          lineHeight: 1.6,
           margin: 0,
           flexGrow: 1,
         }}
@@ -282,7 +304,7 @@ function PackCard({
         {pack.description}
       </p>
       <a
-        data-ocid={pack.ocid}
+        data-ocid={`game.${pack.id}.button`}
         href={TELEGRAM_BOT}
         target="_blank"
         rel="noopener noreferrer"
@@ -296,19 +318,19 @@ function PackCard({
           padding: "0.65rem 1rem",
           borderRadius: "8px",
           textDecoration: "none",
-          boxShadow: "0 0 16px rgba(34,197,94,0.55)",
+          boxShadow: "0 0 12px rgba(34,197,94,0.4)",
           transition: "box-shadow 0.2s ease, background-color 0.15s ease",
           marginTop: "0.5rem",
         }}
         onMouseEnter={(e) => {
           const el = e.currentTarget as HTMLAnchorElement;
           el.style.backgroundColor = "#16a34a";
-          el.style.boxShadow = "0 0 24px rgba(34,197,94,0.8)";
+          el.style.boxShadow = "0 0 20px rgba(34,197,94,0.65)";
         }}
         onMouseLeave={(e) => {
           const el = e.currentTarget as HTMLAnchorElement;
           el.style.backgroundColor = "#22c55e";
-          el.style.boxShadow = "0 0 16px rgba(34,197,94,0.55)";
+          el.style.boxShadow = "0 0 12px rgba(34,197,94,0.4)";
         }}
       >
         Start on Telegram
