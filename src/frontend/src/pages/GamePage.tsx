@@ -17,6 +17,12 @@ const gameBackgrounds: Record<string, string> = {
   roblox: "linear-gradient(135deg, #0a0a1a 0%, #1a0a2e 50%, #0a1a2e 100%)",
 };
 
+const packPrices: Record<string, string> = {
+  beginner: "$10",
+  advanced: "$15",
+  pro: "$20",
+};
+
 const defaultPacks = [
   {
     id: "beginner",
@@ -64,8 +70,6 @@ const chessPacks = [
     popular: true,
   },
 ];
-
-const TELEGRAM_BOT = "https://t.me/LevelupAcadem_ybot";
 
 export default function GamePage() {
   const { gameId } = useParams({ from: "/game/$gameId" });
@@ -232,6 +236,7 @@ function PackCard({
   index: number;
 }) {
   const [hovered, setHovered] = useState(false);
+  const price = packPrices[pack.id];
 
   return (
     <div
@@ -310,42 +315,25 @@ function PackCard({
       >
         {pack.description}
       </p>
-      <a
-        data-ocid={`game.${pack.id}.button`}
-        href={TELEGRAM_BOT}
-        target="_blank"
-        rel="noopener noreferrer"
+      {/* Price box */}
+      <div
+        data-ocid={`game.${pack.id}.card`}
         style={{
           display: "block",
           textAlign: "center",
           backgroundColor: "#22c55e",
           color: "#ffffff",
           fontWeight: 700,
-          fontSize: "0.88rem",
+          fontSize: "1rem",
           padding: "0.7rem 1rem",
           borderRadius: "8px",
-          textDecoration: "none",
           boxShadow: "0 0 14px rgba(34,197,94,0.45)",
-          transition:
-            "box-shadow 0.2s ease, background-color 0.15s ease, transform 0.15s ease",
           marginTop: "0.5rem",
           letterSpacing: "0.02em",
         }}
-        onMouseEnter={(e) => {
-          const el = e.currentTarget as HTMLAnchorElement;
-          el.style.backgroundColor = "#16a34a";
-          el.style.boxShadow = "0 0 24px rgba(34,197,94,0.7)";
-          el.style.transform = "translateY(-1px)";
-        }}
-        onMouseLeave={(e) => {
-          const el = e.currentTarget as HTMLAnchorElement;
-          el.style.backgroundColor = "#22c55e";
-          el.style.boxShadow = "0 0 14px rgba(34,197,94,0.45)";
-          el.style.transform = "translateY(0)";
-        }}
       >
-        Start on Telegram
-      </a>
+        Price — {price}
+      </div>
     </div>
   );
 }

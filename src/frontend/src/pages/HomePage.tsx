@@ -20,7 +20,7 @@ const games = [
   {
     id: "valorant",
     name: "Valorant",
-    img: "/assets/uploads/valorant-2.jpeg",
+    img: "/assets/uploads/valorant-1.jpg",
   },
   {
     id: "roblox",
@@ -310,8 +310,9 @@ function GameCard({
           inset: 0,
           width: "100%",
           height: "100%",
-          objectFit: "cover",
+          objectFit: "contain",
           display: "block",
+          padding: "8px",
         }}
       />
 
@@ -320,7 +321,7 @@ function GameCard({
         style={{
           position: "absolute",
           inset: 0,
-          background: "rgba(0,0,0,0.35)",
+          background: "rgba(0,0,0,0.25)",
           pointerEvents: "none",
         }}
       />
