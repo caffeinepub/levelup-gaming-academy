@@ -25,29 +25,29 @@ const packPrices: Record<string, string> = {
 
 const telegramLinks: Record<string, Record<string, string>> = {
   chess: {
-    beginner: "https://t.me/levelupgamingacdaemybot?text=/chess_beginner",
-    advanced: "https://t.me/levelupgamingacdaemybot?text=/chess_advanced",
-    pro: "https://t.me/levelupgamingacdaemybot?text=/chess_pro",
+    beginner: "https://t.me/LevelupGamingAcademy1_bot?start=chess_beginner",
+    advanced: "https://t.me/LevelupGamingAcademy1_bot?start=chess_advanced",
+    pro: "https://t.me/LevelupGamingAcademy1_bot?start=chess_pro",
   },
   valorant: {
-    beginner: "https://t.me/levelupgamingacdaemybot?text=/valorant_beginner",
-    advanced: "https://t.me/levelupgamingacdaemybot?text=/valorant_advanced",
-    pro: "https://t.me/levelupgamingacdaemybot?text=/valorant_pro",
+    beginner: "https://t.me/LevelupGamingAcademy1_bot?start=valorant_beginner",
+    advanced: "https://t.me/LevelupGamingAcademy1_bot?start=valorant_advanced",
+    pro: "https://t.me/LevelupGamingAcademy1_bot?start=valorant_pro",
   },
   fortnite: {
-    beginner: "https://t.me/levelupgamingacdaemybot?text=/fortnite_beginner",
-    advanced: "https://t.me/levelupgamingacdaemybot?text=/fortnite_advanced",
-    pro: "https://t.me/levelupgamingacdaemybot?text=/fortnite_pro",
+    beginner: "https://t.me/LevelupGamingAcademy1_bot?start=fortnite_beginner",
+    advanced: "https://t.me/LevelupGamingAcademy1_bot?start=fortnite_advanced",
+    pro: "https://t.me/LevelupGamingAcademy1_bot?start=fortnite_pro",
   },
   roblox: {
-    beginner: "https://t.me/levelupgamingacdaemybot?text=/roblox_beginner",
-    advanced: "https://t.me/levelupgamingacdaemybot?text=/roblox_advanced",
-    pro: "https://t.me/levelupgamingacdaemybot?text=/roblox_pro",
+    beginner: "https://t.me/LevelupGamingAcademy1_bot?start=roblox_beginner",
+    advanced: "https://t.me/LevelupGamingAcademy1_bot?start=roblox_advanced",
+    pro: "https://t.me/LevelupGamingAcademy1_bot?start=roblox_pro",
   },
   codm: {
-    beginner: "https://t.me/levelupgamingacdaemybot?text=/codm_beginner",
-    advanced: "https://t.me/levelupgamingacdaemybot?text=/codm_advanced",
-    pro: "https://t.me/levelupgamingacdaemybot?text=/codm_pro",
+    beginner: "https://t.me/LevelupGamingAcademy1_bot?start=codm_beginner",
+    advanced: "https://t.me/LevelupGamingAcademy1_bot?start=codm_advanced",
+    pro: "https://t.me/LevelupGamingAcademy1_bot?start=codm_pro",
   },
 };
 
@@ -223,7 +223,7 @@ export default function GamePage() {
               index={index}
               telegramUrl={
                 telegramLinks[gameId]?.[pack.id] ??
-                "https://t.me/levelupgamingacdaemybot"
+                "https://t.me/LevelupGamingAcademy1_bot"
               }
             />
           ))}
