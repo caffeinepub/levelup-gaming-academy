@@ -25,29 +25,29 @@ const packPrices: Record<string, string> = {
 
 const telegramLinks: Record<string, Record<string, string>> = {
   chess: {
-    beginner: "https://t.me/LevelupGamingAcademy1_bot?start=chess_beginner",
-    advanced: "https://t.me/LevelupGamingAcademy1_bot?start=chess_advanced",
-    pro: "https://t.me/LevelupGamingAcademy1_bot?start=chess_pro",
+    beginner: "https://t.me/LevelupGamingAcademy1_bot?text=/chess_beginner",
+    advanced: "https://t.me/LevelupGamingAcademy1_bot?text=/chess_advanced",
+    pro: "https://t.me/LevelupGamingAcademy1_bot?text=/chess_pro",
   },
   valorant: {
-    beginner: "https://t.me/LevelupGamingAcademy1_bot?start=valorant_beginner",
-    advanced: "https://t.me/LevelupGamingAcademy1_bot?start=valorant_advanced",
-    pro: "https://t.me/LevelupGamingAcademy1_bot?start=valorant_pro",
+    beginner: "https://t.me/LevelupGamingAcademy1_bot?text=/valorant_beginner",
+    advanced: "https://t.me/LevelupGamingAcademy1_bot?text=/valorant_advanced",
+    pro: "https://t.me/LevelupGamingAcademy1_bot?text=/valorant_pro",
   },
   fortnite: {
-    beginner: "https://t.me/LevelupGamingAcademy1_bot?start=fortnite_beginner",
-    advanced: "https://t.me/LevelupGamingAcademy1_bot?start=fortnite_advanced",
-    pro: "https://t.me/LevelupGamingAcademy1_bot?start=fortnite_pro",
+    beginner: "https://t.me/LevelupGamingAcademy1_bot?text=/fortnite_beginner",
+    advanced: "https://t.me/LevelupGamingAcademy1_bot?text=/fortnite_advanced",
+    pro: "https://t.me/LevelupGamingAcademy1_bot?text=/fortnite_pro",
   },
   roblox: {
-    beginner: "https://t.me/LevelupGamingAcademy1_bot?start=roblox_beginner",
-    advanced: "https://t.me/LevelupGamingAcademy1_bot?start=roblox_advanced",
-    pro: "https://t.me/LevelupGamingAcademy1_bot?start=roblox_pro",
+    beginner: "https://t.me/LevelupGamingAcademy1_bot?text=/roblox_beginner",
+    advanced: "https://t.me/LevelupGamingAcademy1_bot?text=/roblox_advanced",
+    pro: "https://t.me/LevelupGamingAcademy1_bot?text=/roblox_pro",
   },
   codm: {
-    beginner: "https://t.me/LevelupGamingAcademy1_bot?start=codm_beginner",
-    advanced: "https://t.me/LevelupGamingAcademy1_bot?start=codm_advanced",
-    pro: "https://t.me/LevelupGamingAcademy1_bot?start=codm_pro",
+    beginner: "https://t.me/LevelupGamingAcademy1_bot?text=/codm_beginner",
+    advanced: "https://t.me/LevelupGamingAcademy1_bot?text=/codm_advanced",
+    pro: "https://t.me/LevelupGamingAcademy1_bot?text=/codm_pro",
   },
 };
 
