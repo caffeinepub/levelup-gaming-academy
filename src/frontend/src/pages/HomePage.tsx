@@ -192,57 +192,6 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* Tournament Section */}
-      <div
-        style={{
-          position: "relative",
-          zIndex: 1,
-          marginTop: "2.5rem",
-          maxWidth: "560px",
-          width: "100%",
-          background: "rgba(34,197,94,0.06)",
-          border: "1px solid rgba(34,197,94,0.35)",
-          boxShadow:
-            "0 0 30px rgba(34,197,94,0.15), 0 8px 30px rgba(0,0,0,0.4)",
-          borderRadius: "16px",
-          padding: "2rem",
-          textAlign: "center",
-          animation: "slideUp 0.8s ease 0.6s both",
-        }}
-      >
-        <div
-          style={{
-            fontSize: "2rem",
-            marginBottom: "0.75rem",
-          }}
-        >
-          🏆
-        </div>
-        <h2
-          style={{
-            fontSize: "1.4rem",
-            fontWeight: 700,
-            color: "#ffffff",
-            margin: "0 0 0.75rem 0",
-            letterSpacing: "-0.01em",
-            fontFamily: "'Cabinet Grotesk', 'Mona Sans', sans-serif",
-          }}
-        >
-          Monthly Tournament
-        </h2>
-        <p
-          style={{
-            fontSize: "0.92rem",
-            color: "#9ca3af",
-            margin: 0,
-            lineHeight: 1.65,
-          }}
-        >
-          We organize a tournament every month where all players can participate
-          and win exciting cash prizes.
-        </p>
-      </div>
-
       {/* Footer */}
       <footer
         style={{

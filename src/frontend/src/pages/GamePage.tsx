@@ -23,50 +23,88 @@ const packPrices: Record<string, string> = {
   pro: "$20",
 };
 
-const defaultPacks = [
-  {
-    id: "beginner",
-    name: "Beginner Pack",
-    description:
-      "We help you improve your skills from the basics and understand the core mechanics of the game.",
-    popular: false,
+const telegramLinks: Record<string, Record<string, string>> = {
+  chess: {
+    beginner: "https://t.me/levelupgamingacdaemybot?text=/chess_beginner",
+    advanced: "https://t.me/levelupgamingacdaemybot?text=/chess_advanced",
+    pro: "https://t.me/levelupgamingacdaemybot?text=/chess_pro",
   },
-  {
-    id: "advanced",
-    name: "Advanced Pack",
-    description:
-      "We help you improve your movement, aim skills, and high IQ level plays.",
-    popular: false,
+  valorant: {
+    beginner: "https://t.me/levelupgamingacdaemybot?text=/valorant_beginner",
+    advanced: "https://t.me/levelupgamingacdaemybot?text=/valorant_advanced",
+    pro: "https://t.me/levelupgamingacdaemybot?text=/valorant_pro",
   },
-  {
-    id: "pro",
-    name: "Pro Pack",
-    description:
-      "We help you master both aim and movement along with advanced high IQ strategies used by top players.",
-    popular: true,
+  fortnite: {
+    beginner: "https://t.me/levelupgamingacdaemybot?text=/fortnite_beginner",
+    advanced: "https://t.me/levelupgamingacdaemybot?text=/fortnite_advanced",
+    pro: "https://t.me/levelupgamingacdaemybot?text=/fortnite_pro",
   },
+  roblox: {
+    beginner: "https://t.me/levelupgamingacdaemybot?text=/roblox_beginner",
+    advanced: "https://t.me/levelupgamingacdaemybot?text=/roblox_advanced",
+    pro: "https://t.me/levelupgamingacdaemybot?text=/roblox_pro",
+  },
+  codm: {
+    beginner: "https://t.me/levelupgamingacdaemybot?text=/codm_beginner",
+    advanced: "https://t.me/levelupgamingacdaemybot?text=/codm_advanced",
+    pro: "https://t.me/levelupgamingacdaemybot?text=/codm_pro",
+  },
+};
+
+const proTournamentBenefits = [
+  "Access to exclusive daily tournaments",
+  "5 tournaments organized every day",
+  "Entry fee between $2 and $10 depending on the tournament",
+  "Cash prizes for winners",
+  "Compete against other high-level trained players",
+  "Improve competitive gameplay experience",
+  "Access to Advanced Pack training content",
 ];
 
-const chessPacks = [
+const beginnerBullets = [
+  "Understanding basic game mechanics",
+  "Learning controls and core gameplay systems",
+  "Beginner aim or movement training depending on the game",
+  "Map awareness and positioning basics",
+  "Improving reaction time and decision making",
+  "Introduction to strategies used by skilled players",
+];
+
+const beginnerGoal =
+  "Build strong fundamentals so players can progress to advanced gameplay.";
+
+const advancedBullets = [
+  "Improving aim accuracy and movement mechanics",
+  "Advanced positioning and map control",
+  "Learning high-IQ plays and tactical decisions",
+  "Understanding enemy prediction and strategy",
+  "Game sense improvement for competitive matches",
+  "Advanced techniques used by professional esports players",
+];
+
+const advancedGoal =
+  "Help players play like competitive esports level players.";
+
+const packs = [
   {
     id: "beginner",
     name: "Beginner Pack",
-    description:
-      "In Beginner we help people start learning the basics of chess, including piece movement, simple tactics, and basic strategies.",
+    bullets: beginnerBullets,
+    goal: beginnerGoal,
     popular: false,
   },
   {
     id: "advanced",
     name: "Advanced Pack",
-    description:
-      "In Advanced we help you learn advanced techniques, better strategies, and high IQ plays to improve your game.",
+    bullets: advancedBullets,
+    goal: advancedGoal,
     popular: false,
   },
   {
     id: "pro",
     name: "Pro Pack",
-    description:
-      "In Pro we help you master advanced techniques and high IQ level plays to compete at a very high level.",
+    bullets: [] as string[],
+    goal: "",
     popular: true,
   },
 ];
@@ -80,8 +118,6 @@ export default function GamePage() {
   const bg =
     gameBackgrounds[gameId] ??
     "linear-gradient(135deg, #0a0a0f 0%, #0d1117 100%)";
-
-  const packs = gameId === "chess" ? chessPacks : defaultPacks;
 
   return (
     <div
@@ -181,29 +217,16 @@ export default function GamePage() {
           }}
         >
           {packs.map((pack, index) => (
-            <PackCard key={pack.id} pack={pack} index={index} />
+            <PackCard
+              key={pack.id}
+              pack={pack}
+              index={index}
+              telegramUrl={
+                telegramLinks[gameId]?.[pack.id] ??
+                "https://t.me/levelupgamingacdaemybot"
+              }
+            />
           ))}
-        </div>
-
-        {/* Tournament note */}
-        <div
-          style={{
-            marginTop: "2.5rem",
-            padding: "1.25rem 1.75rem",
-            background: "rgba(34,197,94,0.07)",
-            border: "1px solid rgba(34,197,94,0.3)",
-            borderRadius: "14px",
-            textAlign: "center",
-            color: "#86efac",
-            fontSize: "0.95rem",
-            fontWeight: "500",
-            lineHeight: 1.6,
-            animation: "slideUp 0.6s ease 0.5s both",
-            boxShadow: "0 0 20px rgba(34,197,94,0.1)",
-          }}
-        >
-          🏆 We organize a tournament every month where all players can
-          participate and win exciting cash prizes.
         </div>
 
         {/* Footer */}
@@ -223,17 +246,62 @@ export default function GamePage() {
   );
 }
 
+function BulletList({ items }: { items: string[] }) {
+  return (
+    <ul
+      style={{
+        listStyle: "none",
+        margin: 0,
+        padding: 0,
+        display: "flex",
+        flexDirection: "column",
+        gap: "0.45rem",
+      }}
+    >
+      {items.map((item) => (
+        <li
+          key={item}
+          style={{
+            display: "flex",
+            alignItems: "flex-start",
+            gap: "0.55rem",
+            fontSize: "0.82rem",
+            color: "#d1d5db",
+            lineHeight: 1.5,
+          }}
+        >
+          <span
+            style={{
+              width: "7px",
+              height: "7px",
+              borderRadius: "50%",
+              background: "#22c55e",
+              boxShadow: "0 0 6px rgba(34,197,94,0.7)",
+              flexShrink: 0,
+              marginTop: "0.3rem",
+            }}
+          />
+          {item}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 function PackCard({
   pack,
   index,
+  telegramUrl,
 }: {
   pack: {
     id: string;
     name: string;
-    description: string;
+    bullets: string[];
+    goal: string;
     popular: boolean;
   };
   index: number;
+  telegramUrl: string;
 }) {
   const [hovered, setHovered] = useState(false);
   const price = packPrices[pack.id];
@@ -292,6 +360,7 @@ function PackCard({
           Most Popular
         </span>
       )}
+
       <h2
         style={{
           fontSize: "1.1rem",
@@ -304,20 +373,77 @@ function PackCard({
       >
         {pack.name}
       </h2>
-      <p
-        style={{
-          fontSize: "0.88rem",
-          color: "#d1d5db",
-          lineHeight: 1.65,
-          margin: 0,
-          flexGrow: 1,
-        }}
-      >
-        {pack.description}
-      </p>
-      {/* Price box */}
-      <div
-        data-ocid={`game.${pack.id}.card`}
+
+      {/* Beginner / Advanced bullet layout */}
+      {pack.id !== "pro" && pack.bullets.length > 0 && (
+        <>
+          <p
+            style={{
+              fontSize: "0.75rem",
+              fontWeight: 700,
+              color: "#22c55e",
+              margin: 0,
+              letterSpacing: "0.06em",
+              textTransform: "uppercase",
+            }}
+          >
+            Training includes:
+          </p>
+          <BulletList items={pack.bullets} />
+          <p
+            style={{
+              fontSize: "0.75rem",
+              fontWeight: 700,
+              color: "#22c55e",
+              margin: "0.25rem 0 0",
+              letterSpacing: "0.06em",
+              textTransform: "uppercase",
+            }}
+          >
+            Goal:
+          </p>
+          <p
+            style={{
+              fontSize: "0.82rem",
+              color: "#d1d5db",
+              lineHeight: 1.55,
+              margin: 0,
+            }}
+          >
+            {pack.goal}
+          </p>
+        </>
+      )}
+
+      {/* Pro Player Benefits */}
+      {pack.id === "pro" && (
+        <div
+          style={{
+            paddingTop: "0.25rem",
+          }}
+        >
+          <p
+            style={{
+              fontSize: "0.8rem",
+              fontWeight: 700,
+              color: "#22c55e",
+              margin: "0 0 0.6rem 0",
+              letterSpacing: "0.06em",
+              textTransform: "uppercase",
+            }}
+          >
+            Pro Player Benefits
+          </p>
+          <BulletList items={proTournamentBenefits} />
+        </div>
+      )}
+
+      {/* Telegram button */}
+      <a
+        href={telegramUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        data-ocid={`game.${pack.id}.primary_button`}
         style={{
           display: "block",
           textAlign: "center",
@@ -330,10 +456,24 @@ function PackCard({
           boxShadow: "0 0 14px rgba(34,197,94,0.45)",
           marginTop: "0.5rem",
           letterSpacing: "0.02em",
+          textDecoration: "none",
+          transition: "background 0.2s ease, box-shadow 0.2s ease",
+        }}
+        onMouseEnter={(e) => {
+          (e.currentTarget as HTMLAnchorElement).style.backgroundColor =
+            "#16a34a";
+          (e.currentTarget as HTMLAnchorElement).style.boxShadow =
+            "0 0 20px rgba(34,197,94,0.7)";
+        }}
+        onMouseLeave={(e) => {
+          (e.currentTarget as HTMLAnchorElement).style.backgroundColor =
+            "#22c55e";
+          (e.currentTarget as HTMLAnchorElement).style.boxShadow =
+            "0 0 14px rgba(34,197,94,0.45)";
         }}
       >
         Price — {price}
-      </div>
+      </a>
     </div>
   );
 }
